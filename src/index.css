@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Red+Rose:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+}
+
+
+/* ---------------------- */
+.custom-calendar {
+  width: 100% !important;
+  max-width: 760px !important;
+  height: 100% !important; /* Full height */
+}
+
+.custom-calendar .rdp {
+  margin-top: 24px !important;
+  margin-bottom: 24px !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: 100% !important; /* Full height */
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.custom-calendar .rdp-months {
+  width: 100% !important;
+  margin-top: 16px !important;
+  flex: 1 !important; /* Take remaining space */
+}
+
+.custom-calendar .rdp-month {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.custom-calendar .rdp-weekday{
+  font-size: 24px !important;
+  font-weight: 500 !important;
+  color: #111827 !important; 
+  margin-top: 30px !important;
+}
+/* Month/Year Header */
+.custom-calendar .rdp-caption {
+  flex-shrink: 0 !important; /* Don't shrink */
+}
+.custom-calendar .rdp-caption_label {
+  font-size: 32px !important;
+}
+/* .custom-calendar .rdp-nav {
+
+} */
+
+/* Table container - take full remaining height */
+.custom-calendar .rdp-table {
+  width: 100% !important;
+  height: 100% !important;
+  table-layout: fixed !important;
+  border-spacing: 8px !important; /* Increase spacing */
+}
+
+/* Header row */
+.custom-calendar .rdp-head_cell {
+  width: 100% !important;
+  font-size: 16px !important;
+  padding: 8px !important;
+  text-align: center !important;
+}
+
+/* Date rows - equal height distribution */
+.custom-calendar .rdp-row {
+  height: calc((100% - 60px) / 6) !important; /* Distribute height equally */
+}
+
+/* Date cells */
+.custom-calendar .rdp-cell {
+  padding: 4px !important;
+  height: 100% !important;
+}
+
+/* Date values styling */
+.custom-calendar .rdp-day {
+  width: 100% !important;
+  height: 64px !important;
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  border: none !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+}
+.custom-calendar .rdp-day_button {
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  border: none !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Hover effect */
+/* .custom-calendar .rdp-day:hover {
+  background-color: #e0f7ff !important;
+  transform: scale(1.05) !important;
+} */
+
+/* Selected date styling - CYAN & FULL ROUNDED */
+.custom-calendar .rdp-day_selected {
+  background-color: #34cceb !important;
+  color: white !important;
+  border-radius: 50% !important;
+  border: none !important;
+  font-weight: 600 !important;
+}
+
+.custom-calendar .rdp-day_selected:hover {
+  background-color: #22d3ee !important;
+  transform: scale(1.08) !important;
+}
+
+/* Today's date */
+.custom-calendar .rdp-day_today {
+  background-color: #f0f9ff !important;
+  color: #0369a1 !important;
+  font-weight: 600 !important;
+}
+
+/* Outside month dates */
+.custom-calendar .rdp-day_outside {
+  color: #9ca3af !important;
+  opacity: 0.5 !important;
+}
+
+
