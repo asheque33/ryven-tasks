@@ -15,7 +15,7 @@ const Header = () => {
         <div className='flex items-center  space-x-4'>
           <Button
             size='md'
-            className='bg-cyan-500 hover:bg-cyan-600 text-white   !py-[19px] !px-[30px] h-full rounded-[10px] mr-2.5'
+            className='bg-[#34CCEB] hover:bg-[#34CCEB] text-white   !py-[19px] !px-[30px] h-full rounded-[10px]'
           >
             <span className=' text-[18px] font-semibold'>Visit Website</span>
 

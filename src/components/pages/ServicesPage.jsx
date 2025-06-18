@@ -12,7 +12,7 @@ import { History } from 'lucide-react';
 import { services } from '@/constants/servicesData';
 import verified from '../../assets/icons/verified.png';
 import whatsapp from '../../assets/icons/whatsapp.png';
-import link from '../../assets/icons/link.png';
+import link2 from '../../assets/icons/link2.png';
 import stars from '../../assets/icons/stars.png';
 const ServicesPage = ({ getBadgeColor }) => {
   return (
@@ -33,8 +33,33 @@ const ServicesPage = ({ getBadgeColor }) => {
             </p>
           </div>
           <div className='flex gap-5 '>
-            <img src={whatsapp} alt='whatsapp' />
-            <img src={link} alt='link' />
+            <Button
+              size={'custom'}
+              variant={'outline'}
+              className=' text-[#34CCEB] hover:text-[#34CCEB] border-[1.5px] border-[#34CCEB] !py-[19px] !px-[30px] h-full rounded-[10px] mr-2.5'
+            >
+              <span className=' text-[18px] font-semibold'>
+                Schedule A Meeting
+              </span>
+
+              <img
+                src={whatsapp}
+                alt='whatsapp'
+                className='text-[#34CCEB] hover:text-[#34CCEB]'
+              />
+            </Button>
+
+            <Button
+              size={'lg'}
+              className='bg-[#34CCEB] hover:bg-[#34CCEB] text-white   !py-[19px] !px-[30px] h-full rounded-[10px] mr-2.5'
+            >
+              <span className=' text-[18px] font-semibold'>
+                History Of Advertisement
+              </span>
+
+              <img src={link2} alt='link2' />
+            </Button>
+            {/* <img src={link} alt='link' /> */}
           </div>
         </div>
       </div>

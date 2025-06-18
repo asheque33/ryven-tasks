@@ -42,12 +42,19 @@ const AdvertisementPage = ({ service, getBadgeColor }) => {
             search results. Track performance with detailed analytics.
           </p>
         </div>
-        <img src={whatsapp} alt='whatsapp' />
+        <Button
+          size={'custom'}
+          variant={'outline'}
+          className=' text-[#34CCEB] hover:text-[#34CCEB] !py-[19px] !px-[30px] h-full rounded-[10px] mr-2.5'
+        >
+          <span className=' text-[18px] font-semibold'>Schedule A Meeting</span>
 
-        {/* <Button variant='outline' onClick={() => setCurrentPage('calendar')}>
-          <Calendar className='w-4 h-4 mr-2' />
-          Schedule A Meeting
-        </Button> */}
+          <img
+            src={whatsapp}
+            alt='whatsapp'
+            className='text-[#34CCEB] hover:text-[#34CCEB]'
+          />
+        </Button>
       </div>
 
       <div>
@@ -102,9 +109,9 @@ const AdvertisementPage = ({ service, getBadgeColor }) => {
                       {service.rating}
                     </span>
                   </div>
-                  <Button className='bg-cyan-500 hover:bg-cyan-600 text-white   !py-[19px] !px-[30px] h-full rounded-[10px] mr-2.5 mt-[30px]'>
+                  <Button className='bg-cyan-500 hover:bg-cyan-600 text-white   !py-[19px] !px-[30px] h-full rounded-[10px]  mt-[30px]'>
                     <span className=' text-[18px] font-semibold'>
-                      Visit Website
+                      Upgrade Advertisement
                     </span>
 
                     <img src={link2} alt='' />

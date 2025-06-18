@@ -8,7 +8,7 @@ import { Card } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { ChevronLeft } from 'lucide-react';
 import { ChevronRight } from 'lucide-react';
-import filter from '../../assets/icons/filter.png';
+import filter from '../../assets/icons/filter.svg';
 const HistoryPage = ({ data, getBadgeColor }) => {
   return (
     <div>
@@ -17,16 +17,46 @@ const HistoryPage = ({ data, getBadgeColor }) => {
           History of Advertisement (All Companies)
         </h3>
         <div className='flex gap-8'>
-          <img src={filter} alt='' />
+          <Button
+            size={'custom'}
+            variant={'outline'}
+            className='text-[#34CCEB] hover:text-[#34CCEB] !py-[19px] !px-[30px] h-full rounded-[10px] mr-2.5'
+            style={{
+              borderRadius: '10px',
+              border: '1.5px solid rgba(52, 204, 235, 0.30)',
+              background: 'rgba(52, 204, 235, 0.10)',
+            }}
+          >
+            <span className=' text-[18px] font-semibold'>Filter</span>
+
+            <img
+              src={filter}
+              alt='whatsapp'
+              className='text-[#34CCEB] hover:text-[#34CCEB]'
+            />
+          </Button>
           <div className='relative'>
-            <Search className='w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400' />
+            <Search className='w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer' />
             <Input
               placeholder='Search'
               className='pl-10 w-[376px] h-[56px] border-[1.5px] border-[#1118271A] rounded-[10px]'
             />
           </div>
+          <Button
+            size={'custom'}
+            variant={'outline'}
+            className=' text-[#34CCEB] hover:text-[#34CCEB] border-[1.5px] border-[#34CCEB] !py-[19px] !px-[30px] h-full rounded-[10px] mr-2.5'
+          >
+            <span className=' text-[18px] font-semibold'>
+              Schedule A Meeting
+            </span>
 
-          <img src={whatsapp} alt='whatsapp' />
+            <img
+              src={whatsapp}
+              alt='whatsapp'
+              className='text-[#34CCEB] hover:text-[#34CCEB]'
+            />
+          </Button>
         </div>
       </div>
 
@@ -113,7 +143,7 @@ const HistoryPage = ({ data, getBadgeColor }) => {
         </table>
 
         <div className='flex items-center justify-between p-4'>
-          <Button variant='outline'>
+          <Button size={'custom'} variant='outline'>
             <ChevronLeft className='w-4 h-4 mr-2' />
             Previous
           </Button>
@@ -122,14 +152,21 @@ const HistoryPage = ({ data, getBadgeColor }) => {
               <Button
                 key={index}
                 variant={page === 1 ? 'default' : 'outline'}
-                size='sm'
-                className={page === 1 ? 'bg-cyan-500 hover:bg-cyan-600' : ''}
+                size={'pagination'}
+                className={
+                  page === 1
+                    ? 'bg-[#34CCEB] hover:bg-[#34CCEB]'
+                    : 'bg-[#34CCEB1A] border border-[#34CCEB4D text-[#34CCEB]'
+                }
               >
                 {page}
               </Button>
             ))}
           </div>
-          <Button className='bg-cyan-500 hover:bg-cyan-600'>
+          <Button
+            size={'custom'}
+            className='bg-[#34CCEB] hover:bg-[#34CCEB] flex-shrink-0 !px-[30px]'
+          >
             Next
             <ChevronRight className='w-4 h-4 ml-2' />
           </Button>
