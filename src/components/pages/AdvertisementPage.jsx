@@ -25,6 +25,8 @@ import phone from '../../assets/icons/phone.png';
 import switchIcon from '../../assets/icons/switch.png';
 import AdsTypeSelect from '../ui/adsTypeSelect';
 import whatsapp from '../../assets/icons/whatsapp.png';
+import PerformanceChart from '../chart/PerformanceChart';
+import AdvertisementDuration from '../advertisement/AdvertisementDuration';
 
 const AdvertisementPage = ({ service, getBadgeColor }) => {
   return (
@@ -158,8 +160,9 @@ const AdvertisementPage = ({ service, getBadgeColor }) => {
           </CardContent>
         </Card>
       </div>
+      <AdvertisementDuration />
       {/* performance-section */}
-      <div className='mt-6 w-full'>
+      {/* <div className='mt-6 w-full'>
         <Card className=' border-none shadow-none bg-transparent'>
           <CardContent className='w-full px-0 border-none shadow-none'>
             <div className='relative w-full'>
@@ -192,7 +195,8 @@ const AdvertisementPage = ({ service, getBadgeColor }) => {
             </div>
           </CardContent>
         </Card>
-      </div>
+      </div> */}
+      <PerformanceChart />
     </div>
   );
 };
