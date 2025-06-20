@@ -12,6 +12,7 @@ import {
 import { Button } from '../ui/button';
 import link2 from '../../assets/icons/link2.png';
 import { Calendar } from '../ui/calendar';
+import CalendarSection from '../calendar/CalendarSection';
 
 const CalendarPage = () => {
   return (
@@ -137,20 +138,6 @@ const CalendarPage = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
-};
-const CalendarSection = () => {
-  const [date, setDate] = React.useState(new Date());
-  return (
-    <div className='custom-calendar h-full'>
-      <Calendar
-        mode='single'
-        selected={date}
-        onSelect={setDate}
-        // className='w-full  bg-[#F3F4F6] rounded-md border shadow-sm [&>div]:w-full [&_table]:w-full'
-        className='w-full h-full bg-[#F3F4F6] rounded-md border shadow-sm'
-      />
     </div>
   );
 };

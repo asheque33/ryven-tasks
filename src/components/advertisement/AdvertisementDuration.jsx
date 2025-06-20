@@ -1,11 +1,35 @@
 import React, { useState } from 'react';
 import { Calendar } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
+import { Calendar as CalendarComponent } from '../ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import CalendarSection from '../calendar/CalendarSection';
 
 const AdvertisementDuration = () => {
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [startCalendarOpen, setStartCalendarOpen] = useState(false);
+  const [endCalendarOpen, setEndCalendarOpen] = useState(false);
+
+  const handleStartDateSelect = (date) => {
+    setStartDate(date);
+    setStartCalendarOpen(false);
+  };
+
+  const handleEndDateSelect = (date) => {
+    setEndDate(date);
+    setEndCalendarOpen(false);
+  };
+
+  const formatDate = (date) => {
+    if (!date) return '';
+    // Simple date formatting without external dependency
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
 
   return (
     <div className='w-full bg-white p-6 mt-[30px] rounded-lg border border-gray-200'>
@@ -25,17 +49,34 @@ const AdvertisementDuration = () => {
             <Input
               type='text'
               placeholder='- - -'
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              className='w-full h-[56px] pr-12 text-[#111827] placeholder:text-[20px] placeholder:text-[#11182766] border-[1.5px] border-[#1118271A] bg-[#F3F4F6] rounded-lg'
+              value={formatDate(startDate)}
+              readOnly
+              className='w-full h-[56px] pr-12 text-[#111827] placeholder:text-[20px] placeholder:text-[#11182766] border-[1.5px] border-[#1118271A] bg-[#F3F4F6] rounded-lg cursor-pointer'
+              onClick={() => setStartCalendarOpen(true)}
             />
-            <Button
-              variant='ghost'
-              size='sm'
-              className='absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 hover:bg-transparent'
+            <Popover
+              open={startCalendarOpen}
+              onOpenChange={setStartCalendarOpen}
             >
-              <Calendar className='h-6 w-6 text-[#111827]' />
-            </Button>
+              <PopoverTrigger asChild>
+                <Button
+                  variant='ghost'
+                  size='sm'
+                  className='absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 hover:bg-transparent'
+                >
+                  <Calendar className='h-6 w-6 text-[#111827]' />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className='w-full p-0 z-50' align='center'>
+                <CalendarSection
+                  mode='single'
+                  selected={startDate}
+                  onSelect={handleStartDateSelect}
+                  className='rounded-md border'
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
 
@@ -48,17 +89,42 @@ const AdvertisementDuration = () => {
             <Input
               type='text'
               placeholder='- - -'
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              className='w-full h-[56px] pr-12 text-[#111827] placeholder:text-[20px] placeholder:text-[#11182766] bg-[#F3F4F6] border-[1.5px] border-[#1118271A] rounded-lg'
+              value={formatDate(endDate)}
+              readOnly
+              className='w-full h-[56px] pr-12 text-[#111827] placeholder:text-[20px] placeholder:text-[#11182766] bg-[#F3F4F6] border-[1.5px] border-[#1118271A] rounded-lg cursor-pointer'
+              onClick={() => setEndCalendarOpen(true)}
             />
-            <Button
-              variant='ghost'
-              size='sm'
-              className='absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 hover:bg-transparent'
-            >
-              <Calendar className='h-6 w-6 text-[#111827]' />
-            </Button>
+            <Popover open={endCalendarOpen} onOpenChange={setEndCalendarOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant='ghost'
+                  size='sm'
+                  className='absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 hover:bg-transparent'
+                >
+                  <Calendar className='h-6 w-6 text-[#111827]' />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent
+                className='w-auto  p-0 z-50'
+                side={'top'}
+                align={'start'}
+              >
+                {/* <CalendarComponent
+                  mode='single'
+                  selected={endDate}
+                  onSelect={handleEndDateSelect}
+                  className='rounded-md border'
+                  disabled={(date) => startDate && date < startDate} // End date can't be before start date
+                  initialFocus
+                /> */}
+                <CalendarSection
+                  selected={endDate}
+                  onSelect={handleEndDateSelect}
+                  disabled={(date) => startDate && date < startDate}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
       </div>
