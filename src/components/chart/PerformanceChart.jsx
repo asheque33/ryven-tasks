@@ -1,14 +1,13 @@
-import { chartData } from '@/constants/chartData';
-import React from 'react';
+import { chartData } from '@/data/chartData';
 import {
-  AreaChart,
   Area,
+  AreaChart,
+  CartesianGrid,
+  ReferenceLine,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  ReferenceLine,
 } from 'recharts';
 import { Card } from '../ui/card';
 

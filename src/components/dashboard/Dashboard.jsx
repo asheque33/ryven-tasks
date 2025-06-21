@@ -1,21 +1,14 @@
-import { historyData } from '@/constants/historyData';
-import { sessionsData } from '@/constants/sessionData';
-import React from 'react';
-import ServicesPage from '../pages/ServicesPage';
-import SessionsPage from '../pages/SessionsPage';
+import { historyData } from '@/data/historyData';
+import { services } from '@/data/servicesData';
+import { sessionsData } from '@/data/sessionData';
+import { useLocation, useNavigate } from 'react-router-dom';
+import AdvertisementPage from '../pages/AdvertisementPage';
 import CalendarPage from '../pages/CalendarPage';
 import HistoryPage from '../pages/HistoryPage';
-import AdvertisementPage from '../pages/AdvertisementPage';
-import { ChevronDown } from 'lucide-react';
-import { ChevronRight } from 'lucide-react';
-import { Button } from '../ui/button';
-import { ExternalLink } from 'lucide-react';
-import { Bell } from 'lucide-react';
-import { Avatar, AvatarFallback } from '../ui/avatar';
-import SideBar from './SideBar';
-import { services } from '@/constants/servicesData';
+import ServicesPage from '../pages/ServicesPage';
+import SessionsPage from '../pages/SessionsPage';
 import Header from './Header';
-import { useLocation, useNavigate } from 'react-router-dom';
+import SideBar from './SideBar';
 
 const getBadgeColor = (badge) => {
   const colors = {
@@ -41,30 +34,19 @@ const Dashboard = () => {
     switch (currentPage) {
       case 'services':
         return (
-          <ServicesPage
-            services={services}
-            setCurrentPage={setCurrentPage}
-            getBadgeColor={getBadgeColor}
-          />
+          <ServicesPage services={services} getBadgeColor={getBadgeColor} />
         );
       case 'advertisement':
         return (
           <AdvertisementPage
             service={services[0]}
-            setCurrentPage={setCurrentPage}
             getBadgeColor={getBadgeColor}
           />
         );
       case 'history':
-        return (
-          <HistoryPage
-            data={historyData}
-            setCurrentPage={setCurrentPage}
-            getBadgeColor={getBadgeColor}
-          />
-        );
+        return <HistoryPage data={historyData} getBadgeColor={getBadgeColor} />;
       case 'calendar':
-        return <CalendarPage setCurrentPage={setCurrentPage} />;
+        return <CalendarPage />;
       case 'sessions':
         return (
           <SessionsPage

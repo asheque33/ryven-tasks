@@ -67,7 +67,11 @@ const AdvertisementDuration = () => {
                   <Calendar className='h-6 w-6 text-[#111827]' />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className='w-full p-0 z-50' align='center'>
+              <PopoverContent
+                className='w-full p-0 z-50'
+                side={'left'}
+                align={'start'}
+              >
                 <CalendarSection
                   mode='single'
                   selected={startDate}
@@ -106,7 +110,7 @@ const AdvertisementDuration = () => {
               </PopoverTrigger>
               <PopoverContent
                 className='w-auto  p-0 z-50'
-                side={'top'}
+                side={'left'}
                 align={'start'}
               >
                 {/* <CalendarComponent

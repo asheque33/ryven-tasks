@@ -1,7 +1,5 @@
-import { navigationItems } from '@/constants/navItem';
-import { ChevronRight } from 'lucide-react';
-import { ChevronDown } from 'lucide-react';
-import React from 'react';
+import { navigationItems } from '@/data/navItem';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import logo from '../../assets/logo.png';
 

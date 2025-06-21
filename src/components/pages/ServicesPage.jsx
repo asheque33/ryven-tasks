@@ -1,19 +1,12 @@
-import React from 'react';
-import { Button } from '../ui/button';
-import { Calendar } from 'lucide-react';
-import { Card, CardContent } from '../ui/card';
-import { Badge } from '../ui/badge';
-import { Star } from 'lucide-react';
-import { MapPin } from 'lucide-react';
-import { Mail } from 'lucide-react';
-import { Phone } from 'lucide-react';
-import { Clock } from 'lucide-react';
-import { History } from 'lucide-react';
-import { services } from '@/constants/servicesData';
-import verified from '../../assets/icons/verified.png';
-import whatsapp from '../../assets/icons/whatsapp.png';
+import { services } from '@/data/servicesData';
+import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 import link2 from '../../assets/icons/link2.png';
 import stars from '../../assets/icons/stars.png';
+import verified from '../../assets/icons/verified.png';
+import whatsapp from '../../assets/icons/whatsapp.png';
+import { Badge } from '../ui/badge';
+import { Button } from '../ui/button';
+import { Card, CardContent } from '../ui/card';
 const ServicesPage = ({ getBadgeColor }) => {
   return (
     <div>

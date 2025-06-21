@@ -27,6 +27,7 @@ import AdsTypeSelect from '../ui/adsTypeSelect';
 import whatsapp from '../../assets/icons/whatsapp.png';
 import PerformanceChart from '../chart/PerformanceChart';
 import AdvertisementDuration from '../advertisement/AdvertisementDuration';
+import stars from '../../assets/icons/stars.png';
 
 const AdvertisementPage = ({ service, getBadgeColor }) => {
   return (
@@ -101,12 +102,13 @@ const AdvertisementPage = ({ service, getBadgeColor }) => {
                   </div>
 
                   <div className='flex items-center space-x-1'>
-                    {[...Array(5)].map((_, i) => (
+                    {/* {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
                         className='w-8 h-8 fill-yellow-400 text-yellow-400'
                       />
-                    ))}
+                    ))} */}
+                    <img src={stars} alt='' />
                     <span className='ml-2 text-3xl font-medium'>
                       {service.rating}
                     </span>
