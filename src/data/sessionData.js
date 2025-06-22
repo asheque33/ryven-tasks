@@ -1,7 +1,8 @@
 import logo3 from '../assets/persons/p-2.png';
 import logo2 from '../assets/persons/p-3.png';
-import logo1 from '../assets/icons/p-1.png';
-export const sessionsData = [
+import logo1 from '../assets/persons/p-1.png';
+import logo4 from '../assets/persons/p-4.png';
+const data = [
   {
     id: 1,
     date: '01/10/2024',
@@ -22,74 +23,27 @@ export const sessionsData = [
   },
   {
     id: 3,
-    date: '01/10/2024',
-    marketer: 'Wade Warren',
-    avatar: logo1,
-    time: '02:02 am',
-    duration: '1 Hour',
+    date: '15/11/2024',
+    marketer: 'Cody Fisher',
+    avatar: logo3,
+    time: '04:02 am',
+    duration: '2 Hour',
     status: 'Active',
   },
   {
     id: 4,
-    date: '15/11/2024',
-    marketer: 'Esther Howard',
-    avatar: logo2,
-    time: '05:51 am',
-    duration: '30 Minutes',
-    status: 'Closed',
-  },
-  {
-    id: 5,
-    date: '15/11/2024',
-    marketer: 'Annette Black',
-    avatar: logo1,
-    time: '01:09 am',
-    duration: '45 Minutes',
-    status: 'Closed',
-  },
-  {
-    id: 6,
-    date: '15/11/2024',
-    marketer: 'Cody Fisher',
-    avatar: logo3,
-    time: '04:02 am',
-    duration: '2 Hour',
-    status: 'Active',
-  },
-  {
-    id: 7,
-    date: '15/11/2024',
-    marketer: 'Annette Black',
-    avatar: logo1,
-    time: '01:09 am',
-    duration: '45 Minutes',
-    status: 'Closed',
-  },
-  {
-    id: 8,
-    date: '15/11/2024',
-    marketer: 'Esther Howard',
-    avatar: logo2,
-    time: '05:51 am',
-    duration: '30 Minutes',
-    status: 'Closed',
-  },
-  {
-    id: 9,
-    date: '15/11/2024',
-    marketer: 'Annette Black',
-    avatar: logo1,
-    time: '01:09 am',
-    duration: '45 Minutes',
-    status: 'Closed',
-  },
-  {
-    id: 10,
-    date: '15/11/2024',
-    marketer: 'Cody Fisher',
-    avatar: logo3,
-    time: '04:02 am',
-    duration: '2 Hour',
+    date: '10/03/2023',
+    marketer: 'Darrell Steward',
+    avatar: logo4,
+    time: '06:41 pm',
+    duration: '6 Hour',
     status: 'Closed',
   },
 ];
+export const sessionsData = Array.from({ length: 80 }, (_, index) => {
+  const item = data[index % data.length];
+  return {
+    ...item,
+    id: index + 1,
+  };
+});

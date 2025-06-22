@@ -4,8 +4,8 @@ import { Button } from '../ui/button';
 import HistoryLists from '../history/HistoryLists';
 import whatsapp from '../../assets/icons/whatsapp.png';
 import FilterHistory from '../history/FilterHistory';
-import SearchHistory from '../history/SearchHistory';
 import { useMemo, useState } from 'react';
+import SearchSection from '../Shared/Search/SearchSection';
 
 const HistoryPage = ({ data, getBadgeColor }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -79,7 +79,7 @@ const HistoryPage = ({ data, getBadgeColor }) => {
         </h3>
         <div className='flex-[1.65] flex gap-5'>
           <FilterHistory filters={filters} onFiltersChange={setFilters} />
-          <SearchHistory
+          <SearchSection
             searchTerm={searchTerm}
             onSearchChange={setSearchTerm}
             onClearSearch={() => setSearchTerm('')}

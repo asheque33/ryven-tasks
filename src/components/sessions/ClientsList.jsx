@@ -1,18 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from '../ui/button';
-import { Card } from '../ui/card';
+import {
+  ChevronLeft,
+  ChevronRight,
+  Eye,
+  MessageCircle,
+  MoreVertical,
+  Search,
+  Trash2,
+} from 'lucide-react';
 import { Badge } from '../ui/badge';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Card } from '../ui/card';
+import { useEffect, useState } from 'react';
 import NoDataFound from '../noItem/NoDataFound';
 
-const HistoryLists = ({ data, getBadgeColor }) => {
+const ClientsList = ({ data, getBadgeColor }) => {
+  const [showActions, setShowActions] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
   // Reset page when data changes
   useEffect(() => {
-    setCurrentPage(1);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setCurrentPage(1);
   }, [data.length]);
 
   // Pagination calculations
@@ -54,7 +64,6 @@ const HistoryLists = ({ data, getBadgeColor }) => {
       totalPages,
     ];
   };
-
   return (
     <Card className='py-0'>
       <table className='w-full'>
@@ -64,28 +73,22 @@ const HistoryLists = ({ data, getBadgeColor }) => {
               SL
             </th>
             <th className='p-4 text-left text-sm font-medium text-gray-600'>
-              Company Name
-            </th>
-            <th className='p-4 text-left text-sm font-medium text-gray-600'>
-              Ad Status
-            </th>
-            <th className='p-4 text-left text-sm font-medium text-gray-600'>
-              Impressions
-            </th>
-            <th className='p-4 text-left text-sm font-medium text-gray-600'>
-              Click
-            </th>
-            <th className='p-4 text-left text-sm font-medium text-gray-600'>
-              CTR
-            </th>
-            <th className='p-4 text-left text-sm font-medium text-gray-600'>
-              Profile Visit
-            </th>
-            <th className='p-4 text-left text-sm font-medium text-gray-600'>
               Start Date
             </th>
             <th className='p-4 text-left text-sm font-medium text-gray-600'>
-              End Date
+              Marketer Name
+            </th>
+            <th className='p-4 text-left text-sm font-medium text-gray-600'>
+              Time
+            </th>
+            <th className='p-4 text-left text-sm font-medium text-gray-600'>
+              Duration
+            </th>
+            <th className='p-4 text-left text-sm font-medium text-gray-600'>
+              Status
+            </th>
+            <th className='p-4 text-left text-sm font-medium text-gray-600'>
+              Actions
             </th>
           </tr>
         </thead>
@@ -96,15 +99,18 @@ const HistoryLists = ({ data, getBadgeColor }) => {
                 <td className='p-4 text-sm'>
                   {String(startIndex + index + 1).padStart(2, '0')}
                 </td>
+                <td className='p-4'>{item.date}</td>
                 <td className='p-4'>
                   <div className='flex items-center space-x-2'>
-                    <div className='w-[36px] h-[36px] rounded-full flex items-center justify-center'>
-                      <img src={item.logo} alt='logo' />
+                    <div className='w-[36px] h-[36px] rounded-full  flex items-center justify-center text-white text-[16px]'>
+                      <img src={item.avatar} alt='logo' />
                     </div>
-                    <span>{item.company}</span>
+                    <span>{item.marketer}</span>
                   </div>
                 </td>
-                <td>
+                <td className='p-4'>{item.time}</td>
+                <td className='p-4'>{item.duration}</td>
+                <td className='p-4'>
                   <Badge
                     className={`${getBadgeColor(
                       item.status
@@ -117,28 +123,43 @@ const HistoryLists = ({ data, getBadgeColor }) => {
                           : 'bg-[#FF4C4C]'
                       }`}
                     ></span>
-                    <span
-                      className={`text-[16px] ${
-                        item.status === 'Active'
-                          ? 'text-[#34CCEB]'
-                          : 'text-[#FF4C4C]'
-                      }`}
-                    >
-                      {item.status}
-                    </span>
+                    {item.status}
                   </Badge>
                 </td>
-                <td className='p-4'>{item.impressions}</td>
-                <td className='p-4'>{item.clicks}</td>
-                <td className='p-4'>{item.ctr}</td>
-                <td className='p-4'>{item.visits}</td>
-                <td className='p-4'>{item.startDate}</td>
-                <td className='p-4'>{item.endDate}</td>
+                <td className='p-4'>
+                  <div className='relative'>
+                    <Button
+                      variant='ghost'
+                      size='sm'
+                      onClick={() =>
+                        setShowActions(showActions === item.id ? null : item.id)
+                      }
+                    >
+                      <MoreVertical className='w-4 h-4' />
+                    </Button>
+                    {showActions === item.id && (
+                      <div className='absolute right-0 top-8 bg-white border rounded-lg shadow-lg p-2 z-10 min-w-32'>
+                        <div className='flex items-center p-2 hover:bg-gray-100 rounded cursor-pointer text-sm'>
+                          <MessageCircle className='w-4 h-4 mr-2' />
+                          Start Chat
+                        </div>
+                        <div className='flex items-center p-2 hover:bg-gray-100 rounded cursor-pointer text-sm'>
+                          <Eye className='w-4 h-4 mr-2' />
+                          View Chat
+                        </div>
+                        <div className='flex items-center p-2 hover:bg-gray-100 rounded cursor-pointer text-sm text-red-600'>
+                          <Trash2 className='w-4 h-4 mr-2' />
+                          Delete Chat
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </td>
               </tr>
             ))
           ) : (
-            <tr>
-              <td colSpan={9} className='p-0'>
+            <tr className='border-b hover:bg-gray-50'>
+              <td colSpan='7' className='p-4 text-center text-sm text-gray-500'>
                 <div className='min-h-[60dvh] flex items-center justify-center'>
                   <NoDataFound />
                 </div>
@@ -225,4 +246,4 @@ const HistoryLists = ({ data, getBadgeColor }) => {
   );
 };
 
-export default HistoryLists;
+export default ClientsList;

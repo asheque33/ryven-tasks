@@ -4,9 +4,9 @@ import { sessionsData } from '@/data/sessionData';
 import { useLocation, useNavigate } from 'react-router-dom';
 import AdvertisementPage from '../pages/AdvertisementPage';
 import CalendarPage from '../pages/CalendarPage';
+import ClientsListPage from '../pages/ClientsListPage';
 import HistoryPage from '../pages/HistoryPage';
 import ServicesPage from '../pages/ServicesPage';
-import SessionsPage from '../pages/SessionsPage';
 import Header from './Header';
 import SideBar from './SideBar';
 
@@ -49,7 +49,7 @@ const Dashboard = () => {
         return <CalendarPage />;
       case 'sessions':
         return (
-          <SessionsPage
+          <ClientsListPage
             data={sessionsData}
             setCurrentPage={setCurrentPage}
             getBadgeColor={getBadgeColor}
