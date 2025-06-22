@@ -1,28 +1,75 @@
+// HistoryPage.jsx - Minimized Production Version
+
 import { Button } from '../ui/button';
-import { Filter } from 'lucide-react';
-import { Search } from 'lucide-react';
-import { Input } from '../ui/input';
-import { Card } from '../ui/card';
-import { Badge } from '../ui/badge';
-import { ChevronLeft } from 'lucide-react';
-import { ChevronRight } from 'lucide-react';
 import HistoryLists from '../history/HistoryLists';
 import whatsapp from '../../assets/icons/whatsapp.png';
 import FilterHistory from '../history/FilterHistory';
 import SearchHistory from '../history/SearchHistory';
-import { useMemo } from 'react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+
 const HistoryPage = ({ data, getBadgeColor }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const filteredData = useMemo(() => {
-    if (!searchTerm.trim()) return data;
-    return data.filter((item) =>
-      item.company.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [data, searchTerm]);
-  const clearSearch = () => {
-    setSearchTerm('');
+  const [filters, setFilters] = useState({
+    startDate: '',
+    endDate: '',
+    status: 'all',
+  });
+
+  // Parse DD/MM/YYYY to Date object
+  const parseDate = (dateString) => {
+    if (!dateString) return null;
+    if (dateString.includes('/')) {
+      const [day, month, year] = dateString.split('/');
+      return new Date(
+        `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+      );
+    }
+    return new Date(dateString);
   };
+
+  const filteredData = useMemo(() => {
+    let result = data;
+
+    // Search
+    if (searchTerm.trim()) {
+      result = result.filter((item) =>
+        item.company.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // Status
+    if (filters.status !== 'all') {
+      result = result.filter(
+        (item) => item.status.toLowerCase() === filters.status.toLowerCase()
+      );
+    }
+
+    // Date range
+    if (filters.startDate || filters.endDate) {
+      const filterStart = filters.startDate
+        ? new Date(filters.startDate)
+        : null;
+      const filterEnd = filters.endDate ? new Date(filters.endDate) : null;
+
+      result = result.filter((item) => {
+        const itemStart = parseDate(item.startDate);
+        const itemEnd = parseDate(item.endDate);
+
+        if (!itemStart || !itemEnd) return false;
+
+        if (filterStart && filterEnd) {
+          return itemStart >= filterStart && itemEnd <= filterEnd;
+        } else if (filterStart) {
+          return itemStart >= filterStart;
+        } else if (filterEnd) {
+          return itemEnd <= filterEnd;
+        }
+        return true;
+      });
+    }
+
+    return result;
+  }, [data, searchTerm, filters]);
 
   return (
     <div>
@@ -31,11 +78,11 @@ const HistoryPage = ({ data, getBadgeColor }) => {
           History of Advertisement(All Companies)
         </h3>
         <div className='flex gap-5'>
-          <FilterHistory />
+          <FilterHistory filters={filters} onFiltersChange={setFilters} />
           <SearchHistory
             searchTerm={searchTerm}
             onSearchChange={setSearchTerm}
-            onClearSearch={clearSearch}
+            onClearSearch={() => setSearchTerm('')}
           />
           <Button
             size={'custom'}
@@ -45,7 +92,6 @@ const HistoryPage = ({ data, getBadgeColor }) => {
             <span className=' text-[18px] font-semibold'>
               Schedule A Meeting
             </span>
-
             <img
               src={whatsapp}
               alt='whatsapp'
