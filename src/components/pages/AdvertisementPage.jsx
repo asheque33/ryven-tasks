@@ -48,7 +48,7 @@ const AdvertisementPage = ({ service, getBadgeColor }) => {
         <Button
           size={'custom'}
           variant={'outline'}
-          className=' text-[#34CCEB] hover:text-[#34CCEB] !py-[19px] !px-[30px] h-full rounded-[10px] mr-2.5'
+          className=' text-[#34CCEB] hover:text-[#34CCEB] !py-[19px] !px-[30px] h-full rounded-[10px]'
         >
           <span className=' text-[18px] font-semibold'>Schedule A Meeting</span>
 
@@ -61,7 +61,7 @@ const AdvertisementPage = ({ service, getBadgeColor }) => {
       </div>
 
       <div>
-        <Card className='h-[339px] p-[30px] rounded-[20px]'>
+        <Card className=' py-[30px] rounded-[20px]'>
           <CardContent className=''>
             <div className='flex items-start justify-between'>
               <div className='flex items-center space-x-4'>
@@ -143,12 +143,13 @@ const AdvertisementPage = ({ service, getBadgeColor }) => {
                   <span className='text-[20px]'>{service.phone}</span>
                 </div>
                 <div className='flex items-center justify-end'>
-                  <div className='mr-5'>
-                    <img
+                  <div className='flex items-center mr-5'>
+                    {/* <img
                       src={switchIcon}
                       alt='phone'
                       className='w-[60px] h-[32px]'
-                    />
+                    /> */}
+                    <Switch defaultChecked />
                   </div>
                   <span className='text-[20px] font-medium '>
                     Turn On Advertisement

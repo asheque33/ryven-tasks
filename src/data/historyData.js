@@ -40,7 +40,7 @@ const data = [
     endDate: '01/08/2025',
   },
 ];
-export const historyData = Array.from({ length: 30 }, (_, index) => {
+export const historyData = Array.from({ length: 300 }, (_, index) => {
   const item = data[index % data.length];
   return {
     ...item,

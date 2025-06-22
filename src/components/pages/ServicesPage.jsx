@@ -11,7 +11,7 @@ const ServicesPage = ({ getBadgeColor }) => {
   return (
     <div>
       <div className='mb-8'>
-        <div className='flex items-center justify-between mb-4'>
+        <div className='flex items-start justify-between mb-4'>
           <div>
             <h3 className='text-3xl font-semibold mb-[22px]'>
               Advertise Your Company
@@ -21,15 +21,14 @@ const ServicesPage = ({ getBadgeColor }) => {
               className='text-[20px]'
             >
               Boost your company's visibility by showing it at the top of the
-              search results. Track <br />
-              performance with detailed analytics.
+              search results. Track performance with detailed analytics.
             </p>
           </div>
           <div className='flex gap-5 '>
             <Button
               size={'custom'}
               variant={'outline'}
-              className=' text-[#34CCEB] hover:text-[#34CCEB] border-[1.5px] border-[#34CCEB] !py-[19px] !px-[30px] h-full rounded-[10px] mr-2.5'
+              className='flex-1 text-[#34CCEB] hover:text-[#34CCEB] border-[1.5px] border-[#34CCEB] !py-[19px] !px-[30px] h-full rounded-[10px] !gap-2.5'
             >
               <span className=' text-[18px] font-semibold'>
                 Schedule A Meeting
@@ -44,7 +43,7 @@ const ServicesPage = ({ getBadgeColor }) => {
 
             <Button
               size={'lg'}
-              className='bg-[#34CCEB] hover:bg-[#34CCEB] text-white   !py-[19px] !px-[30px] h-full rounded-[10px] mr-2.5'
+              className='flex-1 bg-[#34CCEB] hover:bg-[#34CCEB] text-white   !py-[19px] !px-[30px] h-full rounded-[10px] gap-2.5'
             >
               <span className=' text-[18px] font-semibold'>
                 History Of Advertisement

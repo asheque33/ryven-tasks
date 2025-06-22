@@ -118,13 +118,13 @@ const FilterHistoryModal = ({ onClose, filters, onFiltersChange }) => {
                   onClick={() =>
                     updateFilter('startDate', '') || updateFilter('endDate', '')
                   }
-                  className='text-xs text-gray-500 hover:text-red-500'
+                  className='text-sm text-gray-500 hover:text-red-500'
                 >
                   Clear
                 </button>
                 <button
                   onClick={() => setIsDateOpen(false)}
-                  className='text-xs text-blue-500 hover:text-blue-700 ml-auto'
+                  className='text-sm text-[#34CCEB]  ml-auto'
                 >
                   Done
                 </button>
@@ -142,7 +142,7 @@ const FilterHistoryModal = ({ onClose, filters, onFiltersChange }) => {
             <select
               value={localFilters.status}
               onChange={(e) => updateFilter('status', e.target.value)}
-              className='w-full h-[56px] p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none appearance-none bg-white'
+              className='w-full h-[56px] p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#34CCEB] focus:border-[#34CCEB] outline-none appearance-none bg-white'
             >
               <option value='all'>All Status</option>
               <option value='active'>Active</option>

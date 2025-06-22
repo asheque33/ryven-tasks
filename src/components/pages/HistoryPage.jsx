@@ -72,12 +72,12 @@ const HistoryPage = ({ data, getBadgeColor }) => {
   }, [data, searchTerm, filters]);
 
   return (
-    <div>
-      <div className='flex items-center justify-between mb-6'>
-        <h3 className='text-[30px] leading-none font-outfit font-semibold'>
+    <>
+      <div className='flex items-center justify-between  mb-6 '>
+        <h3 className='text-[30px] flex-1 leading-none font-outfit font-semibold'>
           History of Advertisement(All Companies)
         </h3>
-        <div className='flex gap-5'>
+        <div className='flex-[1.65] flex gap-5'>
           <FilterHistory filters={filters} onFiltersChange={setFilters} />
           <SearchHistory
             searchTerm={searchTerm}
@@ -87,7 +87,7 @@ const HistoryPage = ({ data, getBadgeColor }) => {
           <Button
             size={'custom'}
             variant={'outline'}
-            className=' text-[#34CCEB] hover:text-[#34CCEB] border-[1.5px] border-[#34CCEB] !py-[14px] !px-[30px] h-full rounded-[10px] ml-2.5'
+            className=' text-[#34CCEB] hover:text-[#34CCEB] border-[1.5px] border-[#34CCEB] !py-[14px] !px-[30px] h-full rounded-[10px] gap-2.5'
           >
             <span className=' text-[18px] font-semibold'>
               Schedule A Meeting
@@ -102,7 +102,7 @@ const HistoryPage = ({ data, getBadgeColor }) => {
       </div>
 
       <HistoryLists data={filteredData} getBadgeColor={getBadgeColor} />
-    </div>
+    </>
   );
 };
 
