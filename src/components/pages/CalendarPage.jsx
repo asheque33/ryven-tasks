@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { ChevronLeft } from 'lucide-react';
 import { ChevronRight } from 'lucide-react';
@@ -13,8 +12,17 @@ import { Button } from '../ui/button';
 import link2 from '../../assets/icons/link2.png';
 import { Calendar } from '../ui/calendar';
 import CalendarSection from '../calendar/CalendarSection';
-
+import { useState } from 'react';
+import check from '../../assets/icons/checkmark.png';
+const durations = [
+  { label: '30 min', value: '30 min' },
+  { label: '1h', value: '1h' },
+  { label: '2h', value: '2h' },
+];
 const CalendarPage = () => {
+  const [selectedDuration, setSelectedDuration] = useState('1h');
+  const [selectedTime, setSelectedTime] = useState('12:00');
+
   return (
     <div>
       <div className='flex items-center justify-between mb-6'>
@@ -57,18 +65,28 @@ const CalendarPage = () => {
             Select Duration *
           </label>
           <div className='flex gap-2.5'>
-            <Button className='py-[14px] px-[30px]' variant='outline' size='sm'>
-              30 min
-            </Button>
-            <Button
-              size='sm'
-              className='py-[14px] px-[30px] bg-cyan-500 hover:bg-cyan-600'
-            >
-              1h
-            </Button>
-            <Button className='py-[14px] px-[30px]' variant='outline' size='sm'>
-              2h
-            </Button>
+            {durations.map((duration) => (
+              <Button
+                key={duration.value}
+                onClick={() => setSelectedDuration(duration.label)}
+                size={'duration'}
+                variant={
+                  selectedDuration === duration.label ? 'default' : 'outline'
+                }
+                className={`py-[14px] px-[30px] ${
+                  selectedDuration === duration.label
+                    ? 'bg-[#34CCEB] hover:bg-[#34CCEB] text-white'
+                    : 'text-[#205CD4] hover:text-[#205CD4] bg-[#34CCEB1A]'
+                }`}
+              >
+                {duration.label}
+                {selectedDuration === duration.label && (
+                  <span className='ml-2'>
+                    <img src={check} alt='' className='w-5 h-5 bg-inherit' />
+                  </span>
+                )}
+              </Button>
+            ))}
           </div>
         </div>
       </section>
@@ -88,9 +106,10 @@ const CalendarPage = () => {
               {['11:00', '12:00', '13:00', '14:00', '15:00'].map(
                 (time, index) => (
                   <div
-                    key={time}
+                    key={index}
+                    onClick={() => setSelectedTime(time)}
                     className={`p-5 h-[70px] rounded-[10px] border-2 cursor-pointer transition-colors text-center text-[20px] font-medium leading-[30px] ${
-                      index === 1
+                      selectedTime === time
                         ? 'bg-[#34CCEB] text-white border-[#00000033]'
                         : 'border-gray-200 hover:border-cyan-300'
                     }`}
@@ -124,7 +143,7 @@ const CalendarPage = () => {
             <Button
               size={'custom'}
               variant='outline'
-              className='flex-1 py-3.5 px-[30px]'
+              className='flex-1 py-3.5 px-[30px] text-[#34CCEB] hover:text-[#34CCEB] bg-[#34CCEB1A] border-[#34CCEB4D]'
             >
               Cancel
             </Button>

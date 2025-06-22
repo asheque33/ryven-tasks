@@ -25,6 +25,8 @@ const buttonVariants = cva(
         default: 'h-9 px-4 py-2 has-[>svg]:px-3',
         sm: 'h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
         lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
+        duration:
+          'h-[44px] min-h-[44px] max-h-[44px] px-[30px] py-[14px] rounded-[10px] text-[18px] font-semibold leading-none flex items-center justify-center has-[>svg]:px-4',
         pagination:
           'h-[44px] min-h-[44px] max-h-[44px] py-[8px] px-[30px] rounded-[10px] text-[20px] font-semibold leading-none flex items-center justify-center has-[>svg]:px-4',
         custom:
