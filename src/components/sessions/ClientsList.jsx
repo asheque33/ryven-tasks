@@ -13,8 +13,10 @@ import { Input } from '../ui/input';
 import { Card } from '../ui/card';
 import { useEffect, useState } from 'react';
 import NoDataFound from '../noItem/NoDataFound';
+import { Upload } from 'lucide-react';
+import { Edit } from 'lucide-react';
 
-const ClientsList = ({ data, getBadgeColor }) => {
+const ClientsList = ({ data, getBadgeColor, onDeleteClient }) => {
   const [showActions, setShowActions] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -139,17 +141,23 @@ const ClientsList = ({ data, getBadgeColor }) => {
                     </Button>
                     {showActions === item.id && (
                       <div className='absolute right-0 top-8 bg-white border rounded-lg shadow-lg p-2 z-10 min-w-32'>
-                        <div className='flex items-center p-2 hover:bg-gray-100 rounded cursor-pointer text-sm'>
-                          <MessageCircle className='w-4 h-4 mr-2' />
-                          Start Chat
+                        <div
+                          onClick={() => setShowActions(null)}
+                          className='flex items-center p-2 hover:bg-gray-100 rounded cursor-pointer text-sm'
+                        >
+                          <Edit className='w-4 h-4 mr-2' />
+                          Update
                         </div>
-                        <div className='flex items-center p-2 hover:bg-gray-100 rounded cursor-pointer text-sm'>
-                          <Eye className='w-4 h-4 mr-2' />
-                          View Chat
-                        </div>
-                        <div className='flex items-center p-2 hover:bg-gray-100 rounded cursor-pointer text-sm text-red-600'>
+
+                        <div
+                          onClick={() => {
+                            onDeleteClient(item.id);
+                            setShowActions(null);
+                          }}
+                          className='flex items-center p-2 hover:bg-gray-100 rounded cursor-pointer text-sm text-red-600'
+                        >
                           <Trash2 className='w-4 h-4 mr-2' />
-                          Delete Chat
+                          Delete
                         </div>
                       </div>
                     )}
@@ -169,7 +177,7 @@ const ClientsList = ({ data, getBadgeColor }) => {
         </tbody>
       </table>
 
-      {/* Simple Pagination */}
+      {/* Pagination */}
       {data.length > itemsPerPage && (
         <div className='flex items-center justify-between p-4'>
           <Button

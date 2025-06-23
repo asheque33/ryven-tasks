@@ -16,12 +16,13 @@ import { Input } from '../ui/input';
 import SearchSection from '../Shared/Search/SearchSection';
 import ClientsList from '../sessions/ClientsList';
 import FilterClients from '../sessions/FilterClients';
+import { sessionsData } from '@/data/sessionData';
 
-const ClientsListPage = ({ data, getBadgeColor }) => {
+const ClientsListPage = ({ getBadgeColor }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [dateFilter, setDateFilter] = useState(null);
+  const [data, setData] = useState(sessionsData);
 
-  // SIMPLE DIRECT FILTERING - NO USEMEMO
   const getFilteredData = () => {
     if (!data) return [];
 
@@ -36,13 +37,13 @@ const ClientsListPage = ({ data, getBadgeColor }) => {
       );
     }
 
-    // Date filter - DIRECT AND SIMPLE
+    // Date filter
     if (dateFilter) {
       const day = dateFilter.getDate();
       const month = dateFilter.getMonth() + 1;
       const year = dateFilter.getFullYear();
 
-      // Create target date string exactly like your data format
+      // Create target date string exactly like data format
       const targetDate = `${day.toString().padStart(2, '0')}/${month
         .toString()
         .padStart(2, '0')}/${year}`;
@@ -54,7 +55,10 @@ const ClientsListPage = ({ data, getBadgeColor }) => {
   };
 
   const filteredData = getFilteredData();
-
+  const handleDeleteClient = (clientId) => {
+    const remainingData = filteredData.filter((item) => item.id !== clientId);
+    setData(remainingData);
+  };
   const handleSearchChange = (value) => {
     setSearchTerm(value);
   };
@@ -120,7 +124,11 @@ const ClientsListPage = ({ data, getBadgeColor }) => {
         </div>
       )}
 
-      <ClientsList data={filteredData} getBadgeColor={getBadgeColor} />
+      <ClientsList
+        data={filteredData}
+        getBadgeColor={getBadgeColor}
+        onDeleteClient={handleDeleteClient}
+      />
     </div>
   );
 };

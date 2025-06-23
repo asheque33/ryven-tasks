@@ -90,7 +90,7 @@ const HistoryLists = ({ data, getBadgeColor }) => {
           </tr>
         </thead>
         <tbody>
-          {currentData.length > 0 ? (
+          {data.length > 0 ? (
             currentData.map((item, index) => (
               <tr key={item.id} className='border-b hover:bg-gray-50'>
                 <td className='p-4 text-sm'>
@@ -148,7 +148,7 @@ const HistoryLists = ({ data, getBadgeColor }) => {
         </tbody>
       </table>
 
-      {/* Simple Pagination */}
+      {/* Pagination */}
       {data.length > itemsPerPage && (
         <div className='flex items-center justify-between p-4'>
           <Button
@@ -215,7 +215,7 @@ const HistoryLists = ({ data, getBadgeColor }) => {
       )}
 
       {/* Entry count */}
-      {data.length > 0 && (
+      {currentData.length > 0 && (
         <div className='px-4 pb-3 text-sm text-gray-600'>
           Showing {startIndex + 1}-
           {Math.min(startIndex + itemsPerPage, data.length)} of {data.length}

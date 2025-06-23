@@ -1,6 +1,5 @@
 import { historyData } from '@/data/historyData';
 import { services } from '@/data/servicesData';
-import { sessionsData } from '@/data/sessionData';
 import { useLocation, useNavigate } from 'react-router-dom';
 import AdvertisementPage from '../pages/AdvertisementPage';
 import CalendarPage from '../pages/CalendarPage';
@@ -48,9 +47,7 @@ const Dashboard = () => {
       case 'calendar':
         return <CalendarPage />;
       case 'sessions':
-        return (
-          <ClientsListPage data={sessionsData} getBadgeColor={getBadgeColor} />
-        );
+        return <ClientsListPage getBadgeColor={getBadgeColor} />;
       default:
         return (
           <ServicesPage services={services} getBadgeColor={getBadgeColor} />
