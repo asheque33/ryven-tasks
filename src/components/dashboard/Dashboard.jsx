@@ -49,11 +49,7 @@ const Dashboard = () => {
         return <CalendarPage />;
       case 'sessions':
         return (
-          <ClientsListPage
-            data={sessionsData}
-            setCurrentPage={setCurrentPage}
-            getBadgeColor={getBadgeColor}
-          />
+          <ClientsListPage data={sessionsData} getBadgeColor={getBadgeColor} />
         );
       default:
         return (

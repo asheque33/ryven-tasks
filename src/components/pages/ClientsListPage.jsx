@@ -6,26 +6,74 @@ import {
   MoreVertical,
   Search,
   Trash2,
+  X,
 } from 'lucide-react';
 import { useState } from 'react';
-import filter from '../../assets/icons/filter.svg';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import { Card } from '../ui/card';
 import { Input } from '../ui/input';
 import SearchSection from '../Shared/Search/SearchSection';
 import ClientsList from '../sessions/ClientsList';
+import FilterClients from '../sessions/FilterClients';
 
 const ClientsListPage = ({ data, getBadgeColor }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const searchedData = data.filter((item) =>
-    item.marketer.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const [dateFilter, setDateFilter] = useState(null);
+
+  // SIMPLE DIRECT FILTERING - NO USEMEMO
+  const getFilteredData = () => {
+    if (!data) return [];
+
+    let result = data;
+
+    // Search filter
+    if (searchTerm && searchTerm.trim()) {
+      result = result.filter(
+        (item) =>
+          item.marketer &&
+          item.marketer.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // Date filter - DIRECT AND SIMPLE
+    if (dateFilter) {
+      const day = dateFilter.getDate();
+      const month = dateFilter.getMonth() + 1;
+      const year = dateFilter.getFullYear();
+
+      // Create target date string exactly like your data format
+      const targetDate = `${day.toString().padStart(2, '0')}/${month
+        .toString()
+        .padStart(2, '0')}/${year}`;
+
+      result = result.filter((item) => item.date === targetDate);
+    }
+
+    return result;
+  };
+
+  const filteredData = getFilteredData();
+
   const handleSearchChange = (value) => {
     setSearchTerm(value);
   };
+
   const handleClearSearch = () => {
     setSearchTerm('');
+  };
+
+  const handleApplyDateFilter = (filter) => {
+    setDateFilter(filter.date);
+  };
+
+  const formatDateForDisplay = (date) => {
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day.toString().padStart(2, '0')}/${month
+      .toString()
+      .padStart(2, '0')}/${year}`;
   };
 
   return (
@@ -35,24 +83,7 @@ const ClientsListPage = ({ data, getBadgeColor }) => {
           History of Advertisement (All Companies)
         </h3>
         <div className='flex gap-5'>
-          <Button
-            size={'custom'}
-            variant={'outline'}
-            className='text-[#34CCEB] hover:text-[#34CCEB]  !py-[19px] !px-[30px] h-full rounded-[10px] mr-2.5'
-            style={{
-              borderRadius: '10px',
-              border: '1.5px solid rgba(52, 204, 235, 0.30)',
-              background: 'rgba(52, 204, 235, 0.10)',
-            }}
-          >
-            <span className=' text-[18px] font-semibold'>Filter</span>
-
-            <img
-              src={filter}
-              alt='whatsapp'
-              className='text-[#34CCEB] hover:text-[#34CCEB]'
-            />
-          </Button>
+          <FilterClients onApplyDateFilter={handleApplyDateFilter} />
           <SearchSection
             searchTerm={searchTerm}
             onSearchChange={handleSearchChange}
@@ -61,8 +92,37 @@ const ClientsListPage = ({ data, getBadgeColor }) => {
         </div>
       </div>
 
-      <ClientsList data={searchedData} getBadgeColor={getBadgeColor} />
+      {/* Active Filter Display */}
+      {dateFilter && (
+        <div className='flex items-center gap-2 mb-4'>
+          <Badge variant='secondary' className='gap-1 pr-1'>
+            <span>Date: {formatDateForDisplay(dateFilter)}</span>
+            <Button
+              variant='ghost'
+              size='sm'
+              className='h-auto p-0.5 hover:bg-transparent'
+              onClick={() => setDateFilter(null)}
+            >
+              <X size={12} />
+            </Button>
+          </Badge>
+        </div>
+      )}
+
+      {/* Results Summary */}
+      {dateFilter && (
+        <div className='mb-4'>
+          <p className='text-sm text-gray-600'>
+            Showing {filteredData.length} of {data.length} results
+            {dateFilter &&
+              ` (filtered by date: ${formatDateForDisplay(dateFilter)})`}
+          </p>
+        </div>
+      )}
+
+      <ClientsList data={filteredData} getBadgeColor={getBadgeColor} />
     </div>
   );
 };
+
 export default ClientsListPage;

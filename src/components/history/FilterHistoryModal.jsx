@@ -96,7 +96,7 @@ const FilterHistoryModal = ({ onClose, filters, onFiltersChange }) => {
                     type='date'
                     value={localFilters.startDate}
                     onChange={(e) => updateFilter('startDate', e.target.value)}
-                    className='w-full h-10 px-3 border border-gray-300 rounded-md text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none'
+                    className='w-full h-10 px-3 border border-gray-300 rounded-md text-sm focus:border-[#34CCEB4D] focus:ring-1 focus:ring-[#34CCEB4D] outline-none'
                   />
                 </div>
                 <div>
@@ -108,7 +108,7 @@ const FilterHistoryModal = ({ onClose, filters, onFiltersChange }) => {
                     value={localFilters.endDate}
                     onChange={(e) => updateFilter('endDate', e.target.value)}
                     min={localFilters.startDate}
-                    className='w-full h-10 px-3 border border-gray-300 rounded-md text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none'
+                    className='w-full h-10 px-3 border border-gray-300 rounded-md text-sm focus:border-[#34CCEB4D] focus:ring-1 focus:ring-[#34CCEB4D] outline-none'
                   />
                 </div>
               </div>
