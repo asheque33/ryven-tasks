@@ -17,11 +17,14 @@ import SearchSection from '../Shared/Search/SearchSection';
 import ClientsList from '../sessions/ClientsList';
 import FilterClients from '../sessions/FilterClients';
 import { sessionsData } from '@/data/sessionData';
+import EditClientModal from '../sessions/EditClientModal';
 
 const ClientsListPage = ({ getBadgeColor }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [dateFilter, setDateFilter] = useState(null);
   const [data, setData] = useState(sessionsData);
+  const [showModal, setShowModal] = useState(false);
+  const [clientToEdit, setClientToEdit] = useState(null);
 
   const getFilteredData = () => {
     if (!data) return [];
@@ -42,8 +45,7 @@ const ClientsListPage = ({ getBadgeColor }) => {
       const day = dateFilter.getDate();
       const month = dateFilter.getMonth() + 1;
       const year = dateFilter.getFullYear();
-
-      // Create target date string exactly like data format
+      // dd/mm/yyyy format
       const targetDate = `${day.toString().padStart(2, '0')}/${month
         .toString()
         .padStart(2, '0')}/${year}`;
@@ -55,10 +57,7 @@ const ClientsListPage = ({ getBadgeColor }) => {
   };
 
   const filteredData = getFilteredData();
-  const handleDeleteClient = (clientId) => {
-    const remainingData = filteredData.filter((item) => item.id !== clientId);
-    setData(remainingData);
-  };
+
   const handleSearchChange = (value) => {
     setSearchTerm(value);
   };
@@ -69,6 +68,24 @@ const ClientsListPage = ({ getBadgeColor }) => {
 
   const handleApplyDateFilter = (filter) => {
     setDateFilter(filter.date);
+  };
+
+  const handleEditClient = (client) => {
+    setClientToEdit(client);
+    setShowModal(true);
+  };
+
+  // Fix: Implement the save functionality
+  const handleSaveClient = (updatedClient) => {
+    setData((prevData) =>
+      prevData.map((item) =>
+        item.id === updatedClient.id ? updatedClient : item
+      )
+    );
+  };
+
+  const handleDeleteClient = (clientId) => {
+    setData((prevData) => prevData.filter((item) => item.id !== clientId));
   };
 
   const formatDateForDisplay = (date) => {
@@ -82,6 +99,15 @@ const ClientsListPage = ({ getBadgeColor }) => {
 
   return (
     <div>
+      {showModal && (
+        <EditClientModal
+          isOpen={showModal}
+          onClose={() => setShowModal(false)}
+          client={clientToEdit}
+          onEditClient={handleSaveClient}
+        />
+      )}
+
       <div className='flex items-center justify-between mb-6'>
         <h3 className='text-3xl font-semibold'>
           History of Advertisement (All Companies)
@@ -114,7 +140,7 @@ const ClientsListPage = ({ getBadgeColor }) => {
       )}
 
       {/* Results Summary */}
-      {dateFilter && (
+      {/* {dateFilter && (
         <div className='mb-4'>
           <p className='text-sm text-gray-600'>
             Showing {filteredData.length} of {data.length} results
@@ -122,11 +148,12 @@ const ClientsListPage = ({ getBadgeColor }) => {
               ` (filtered by date: ${formatDateForDisplay(dateFilter)})`}
           </p>
         </div>
-      )}
+      )} */}
 
       <ClientsList
         data={filteredData}
         getBadgeColor={getBadgeColor}
+        onEditClient={handleEditClient}
         onDeleteClient={handleDeleteClient}
       />
     </div>

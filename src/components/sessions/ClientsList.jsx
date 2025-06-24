@@ -11,15 +11,33 @@ import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Card } from '../ui/card';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import NoDataFound from '../noItem/NoDataFound';
 import { Upload } from 'lucide-react';
 import { Edit } from 'lucide-react';
 
-const ClientsList = ({ data, getBadgeColor, onDeleteClient }) => {
+const ClientsList = ({ data, getBadgeColor, onEditClient, onDeleteClient }) => {
   const [showActions, setShowActions] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  const dropdownRef = useRef(null);
+
+  // Handle outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowActions(null);
+      }
+    };
+
+    // Add event listener
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Cleanup
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   // Reset page when data changes
   useEffect(() => {
@@ -32,7 +50,7 @@ const ClientsList = ({ data, getBadgeColor, onDeleteClient }) => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentData = data.slice(startIndex, startIndex + itemsPerPage);
 
-  // Bulletproof simple logic
+  //  simple logic
   const getVisiblePages = () => {
     if (totalPages <= 5) {
       return [1, 2, 3, 4, 5].slice(0, totalPages);
@@ -129,7 +147,10 @@ const ClientsList = ({ data, getBadgeColor, onDeleteClient }) => {
                   </Badge>
                 </td>
                 <td className='p-4'>
-                  <div className='relative'>
+                  <div
+                    className='relative'
+                    ref={showActions === item.id ? dropdownRef : null}
+                  >
                     <Button
                       variant='ghost'
                       size='sm'
@@ -142,7 +163,10 @@ const ClientsList = ({ data, getBadgeColor, onDeleteClient }) => {
                     {showActions === item.id && (
                       <div className='absolute right-0 top-8 bg-white border rounded-lg shadow-lg p-2 z-10 min-w-32'>
                         <div
-                          onClick={() => setShowActions(null)}
+                          onClick={() => {
+                            onEditClient(item);
+                            setShowActions(null);
+                          }}
                           className='flex items-center p-2 hover:bg-gray-100 rounded cursor-pointer text-sm'
                         >
                           <Edit className='w-4 h-4 mr-2' />
